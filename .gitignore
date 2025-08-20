@@ -1,0 +1,18 @@
+.venv/
+.env
+
+# Ignorer les fichiers les repertoires
+apps/accounts/migrations/
+/media/
+
+# Ignorer les fichiers de cache Python
+config/__pycache__/
+
+# Ignorer les fichiers spécifiques
+src/core/paypal_config.py
+src/schoolliaison/settings.py
+
+# Ignorer les fichiers de cache Python
+**/__pycache__/
+**/*.py[cod]
+**/*.pyc
