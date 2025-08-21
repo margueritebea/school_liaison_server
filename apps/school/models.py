@@ -1,13 +1,13 @@
 from django.db import models
 
-# from apps.accounts.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 
-from django.contrib.auth import get_user_model
 
+# from django.contrib.auth import get_user_model
+# from apps.accounts.models import User
+# User = get_user_model()
 
-User = get_user_model()
 # School Year Model
 class SchoolYear(models.Model):
     start_date = models.DateField()
@@ -23,7 +23,7 @@ class SchoolYear(models.Model):
 class School(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=255)
-    agent = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    agent = models.ForeignKey("accounts.User", on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f"{self.name} - {self.agent}"

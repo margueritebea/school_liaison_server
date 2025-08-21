@@ -6,7 +6,7 @@ from django.utils import timezone
 from datetime import timedelta
 from django.dispatch import receiver
 
-# from apps.school.models import Student
+from apps.school.models import Student
 
 # User Model 
 class User(AbstractUser):
@@ -56,22 +56,22 @@ class PasswordResetAttempt(models.Model):
 # Profile Model
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # student = models.ManyToManyField(Student, blank=True)
+    student = models.ManyToManyField(Student, blank=True)
     image = models.ImageField(upload_to="user_images/", default="default.jpg")
 
     class Meta:
         verbose_name_plural = "1.2 Profile"
     
-    # def remove_student(self, student_id):
-    #     """
-    #     Remove a student from the profile's student list.
-    #     """
-    #     try:
-    #         student = self.student.get(id=student_id)
-    #         self.student.remove(student)
-    #         return True
-    #     except Student.DoesNotExist:
-    #         return False
+    def remove_student(self, student_id):
+        """
+        Remove a student from the profile's student list.
+        """
+        try:
+            student = self.student.get(id=student_id)
+            self.student.remove(student)
+            return True
+        except Student.DoesNotExist:
+            return False
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
