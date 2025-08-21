@@ -80,3 +80,45 @@ class StudentSerializer(serializers.ModelSerializer):
 
     def get_school_infos(self, obj):
         return SchoolSerializer(obj.classe.school).data
+
+class StudentStatisticSerializer(serializers.ModelSerializer):
+    statistics = serializers.SerializerMethodField()
+    school_year = SchoolYearSerializer()
+    class_info = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Student
+        fields = ['id', 'first_name', 'last_name', 'matricule', 'image', 'statistics', 'class_info', 'school_year']
+
+    def get_statistics(self, obj):
+        school_year = self.context.get('school_year')
+        if school_year:
+            statistics = StudentStatistics.objects.filter(student=obj, school_year=school_year).first()
+            if statistics:
+                return {
+                    'absence': statistics.absence,
+                    'absence_autorisee': statistics.absence_autorisee,
+                    'presence': statistics.presence,
+                    'mauvaise_conduite': statistics.mauvaise_conduite,
+                    'bonne_conduite': statistics.bonne_conduite,
+                    'participation_active': statistics.participation_active,
+                    'participation_moyenne': statistics.participation_moyenne,
+                    'participation_faible': statistics.participation_faible,
+                    'bonne_moyenne': statistics.bonne_moyenne,
+                    'mauvaise_moyenne': statistics.mauvaise_moyenne
+                }
+        return {}
+    
+    def get_class_info(self, obj):
+        return {
+            'class_name': obj.classe.name if obj.classe else None,
+            'school_name': obj.classe.school.name if obj.classe and obj.classe.school else None
+        }
+
+class StudentStatisticsDetailSerializer(serializers.ModelSerializer):
+    student = StudentSerializer(read_only=True)
+
+    class Meta:
+        fields = [
+            'student', 'participation_active', 'bonne_conduite', 'presence', 'bonne_moyenne'
+        ]
