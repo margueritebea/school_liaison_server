@@ -8,6 +8,7 @@ from django.db.models.signals import post_save
 # from apps.accounts.models import User
 # User = get_user_model()
 
+
 # School Year Model
 class SchoolYear(models.Model):
     start_date = models.DateField()
@@ -171,32 +172,32 @@ class StudentStatistics(models.Model):
         unique_together = ('student', 'school_year')
 
 # Signal pour mettre à jour les statistiques après la sauvegarde d'une notification
-# @receiver(post_save, sender=Notification)
-# def update_student_statistics(sender, instance, created, **kwargs):
-#     if created:
-#         statistics, _ = StudentStatistics.objects.get_or_create(
-#             student=instance.student,
-#             school_year=instance.school_year
-#         )
-#         for category in instance.categories.all():
-#             if category.name == "présence en classe":
-#                 statistics.presence += 1
-#             elif category.name == "absence en classe":
-#                 statistics.absence += 1
-#             elif category.name == "absence autorisée":
-#                 statistics.absence_autorisee += 1
-#             elif category.name == "bonne conduite à l'école":
-#                 statistics.bonne_conduite += 1
-#             elif category.name == "mauvaise conduite à l'école":
-#                 statistics.mauvaise_conduite += 1
-#             elif category.name == "participation active en classe":
-#                 statistics.participation_active += 1
-#             elif category.name == "participation moyenne en classe":
-#                 statistics.participation_moyenne += 1
-#             elif category.name == "participation faible en classe":
-#                 statistics.participation_faible += 1
-#             elif category.name == "bonne moyenne aux tests/évaluations":
-#                 statistics.bonne_moyenne += 1
-#             elif category.name == "mauvaise moyenne aux tests/évaluations":
-#                 statistics.mauvaise_moyenne += 1
-#         statistics.save()
+@receiver(post_save, sender="notification.Notification")
+def update_student_statistics(sender, instance, created, **kwargs):
+    if created:
+        statistics, _ = StudentStatistics.objects.get_or_create(
+            student=instance.student,
+            school_year=instance.school_year
+        )
+        for category in instance.categories.all():
+            if category.name == "présence en classe":
+                statistics.presence += 1
+            elif category.name == "absence en classe":
+                statistics.absence += 1
+            elif category.name == "absence autorisée":
+                statistics.absence_autorisee += 1
+            elif category.name == "bonne conduite à l'école":
+                statistics.bonne_conduite += 1
+            elif category.name == "mauvaise conduite à l'école":
+                statistics.mauvaise_conduite += 1
+            elif category.name == "participation active en classe":
+                statistics.participation_active += 1
+            elif category.name == "participation moyenne en classe":
+                statistics.participation_moyenne += 1
+            elif category.name == "participation faible en classe":
+                statistics.participation_faible += 1
+            elif category.name == "bonne moyenne aux tests/évaluations":
+                statistics.bonne_moyenne += 1
+            elif category.name == "mauvaise moyenne aux tests/évaluations":
+                statistics.mauvaise_moyenne += 1
+        statistics.save()

@@ -11,7 +11,7 @@ def get_end_of_month(start_date):
 
 class Subscription(models.Model):
     parent = models.ForeignKey("accounts.User", on_delete=models.SET_NULL, null=True, blank=True)
-    student = models.ForeignKey("schol.Student", on_delete=models.CASCADE)
+    student = models.ForeignKey("school.Student", on_delete=models.CASCADE)
     num_months = models.IntegerField()
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     start_date = models.DateField(default=timezone.now)
@@ -45,8 +45,8 @@ class Subscription(models.Model):
 # Payment Model
 class Payment(models.Model):
     subscription = models.ForeignKey(Subscription, on_delete=models.CASCADE, related_name='payments', null=True, blank=True)
-    parent = models.ForeignKey(User,  on_delete=models.SET_NULL, null=True, blank=True)
-    student = models.ForeignKey(Student,  on_delete=models.SET_NULL, null=True, blank=True)
+    parent = models.ForeignKey("accounts.User",  on_delete=models.SET_NULL, null=True, blank=True)
+    student = models.ForeignKey("school.Student",  on_delete=models.SET_NULL, null=True, blank=True)
     payment_method = models.CharField(max_length=50, choices=[
         ('paypal', 'PayPal'),
         ('orange_money', 'Orange Money'),

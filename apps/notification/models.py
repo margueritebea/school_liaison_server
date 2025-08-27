@@ -1,8 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
-
 
 # Category Notification Model 
 class CategoryNotification(models.Model):
@@ -16,14 +13,14 @@ class CategoryNotification(models.Model):
 
 # Notification Model 
 class Notification(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="user")
-    sender = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="sender")
-    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name="student")
+    user = models.ForeignKey("accounts.User", on_delete=models.SET_NULL, null=True, blank=True, related_name="user")
+    sender = models.ForeignKey("accounts.User", on_delete=models.SET_NULL, null=True, blank=True, related_name="sender")
+    student = models.ForeignKey("school.Student", on_delete=models.CASCADE, related_name="student")
     categories = models.ManyToManyField(CategoryNotification, related_name="notifications")
     message = models.TextField()
     is_read = models.BooleanField(default=False)
     date = models.DateField()
-    school_year = models.ForeignKey(SchoolYear, on_delete=models.SET_NULL, null=True, blank=True)
+    school_year = models.ForeignKey("school.SchoolYear", on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f"{self.sender} | {self.student} {self.message}"
@@ -68,11 +65,11 @@ class Notification(models.Model):
 
 # User Notification Model 
 class UserNotification(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    user = models.ForeignKey("accounts.User", on_delete=models.SET_NULL, null=True, blank=True)
     notification = models.ForeignKey(Notification, on_delete=models.CASCADE)
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    student = models.ForeignKey("school.Student", on_delete=models.CASCADE)
     is_read = models.BooleanField(default=False)
-    school_year = models.ForeignKey(SchoolYear, on_delete=models.SET_NULL, null=True, blank=True)
+    school_year = models.ForeignKey("school.SchoolYear", on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f"{self.user.full_name} - {self.student}"

@@ -6,38 +6,39 @@ from . serializers import (
     StudentPhotoSerializer, SchoolYearSerializer, StudentStatisticsDetailSerializer
 )
 
-from django.contrib.auth import authenticate
+# from django.contrib.auth import authenticate
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework_simplejwt.tokens import RefreshToken
+# from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import generics, mixins
+from rest_framework.generics import RetrieveAPIView
+from rest_framework.decorators import  permission_classes
+
 from rest_framework.serializers import ValidationError
 
 from django.shortcuts import get_object_or_404
-from django.core.exceptions import ObjectDoesNotExist
+# from django.core.exceptions import ObjectDoesNotExist
 
-from rest_framework import status
+# from rest_framework import status
 
-from django.utils.crypto import get_random_string
-from django.core.mail import send_mail
-from django.utils import timezone
-from datetime import timedelta, datetime
-from django.utils.dateparse import parse_date
+# from django.utils.crypto import get_random_string
+# from django.core.mail import send_mail
+# from django.utils import timezone
+# from datetime import timedelta, datetime
+# from django.utils.dateparse import parse_date
 
-from rest_framework.exceptions import PermissionDenied
-from rest_framework.decorators import  permission_classes
-from rest_framework.exceptions import NotFound  
+# from rest_framework.exceptions import PermissionDenied
+# from rest_framework.exceptions import NotFound  
 
-import requests
-# from .paypal_api import get_access_token
-# from .paypal_config import PAYPAL_API_BASE
-from rest_framework.generics import RetrieveAPIView
+# import requests
+# # from .paypal_api import get_access_token
+# # from .paypal_config import PAYPAL_API_BASE
 
-from django.db import transaction
-# from .models import PasswordResetAttempt, get_end_of_month, update_student_statistics
-from accounts.permissions import IsParent, IsAgent
+# from django.db import transaction
+# # from .models import PasswordResetAttempt, get_end_of_month, update_student_statistics
+from apps.accounts.permissions import IsParent, IsAgent
 
 
 from .models import Classe, School, Student, Teacher, SchoolYear, StudentStatistics, update_student_statistics
