@@ -6,7 +6,7 @@ from django.utils import timezone
 from datetime import timedelta
 from django.dispatch import receiver
 
-from apps.school.models import Student
+from school.models import Student
 
 # User Model 
 class User(AbstractUser):

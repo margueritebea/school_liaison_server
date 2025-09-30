@@ -2,7 +2,7 @@
 .env
 
 # Ignorer les fichiers les repertoires
-apps/accounts/migrations/
+/accounts/migrations/
 /media/
 
 # Ignorer les fichiers de cache Python

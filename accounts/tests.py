@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 import pytest
-from models import User, Profile
+from . models import User, Profile
 
 # Test User Model
 @pytest.mark.django_db

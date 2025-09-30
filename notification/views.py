@@ -9,8 +9,8 @@ from rest_framework.views import APIView
 
 from .models import CategoryNotification, Notification
 from . serializers import CategoryNotificationSerializer, NotificationSerializer, UserNotificationSerializer
-from apps.accounts.permissions import IsAgent, IsParent
-from apps.school.models import SchoolYear, School, Student, Classe # Subscription
+from accounts.permissions import IsAgent, IsParent
+from school.models import SchoolYear, School, Student, Classe # Subscription
 
 
 
@@ -29,7 +29,7 @@ from rest_framework.exceptions import PermissionDenied
 from rest_framework.decorators import  permission_classes
 from rest_framework.exceptions import NotFound  
 
-from apps.accounts.permissions import IsParent, IsAgent
+from accounts.permissions import IsParent, IsAgent
 
 
 

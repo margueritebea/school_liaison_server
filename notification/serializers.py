@@ -2,11 +2,11 @@ from rest_framework import serializers
 
 from .models import UserNotification, Notification, CategoryNotification
 
-from apps.accounts.serializers import ProfileSerializer, ParentSerializer, SenderReceiverSerializer
-from apps.school.serializers import StudentSerializer, SchoolYearSerializer
+from accounts.serializers import ProfileSerializer, ParentSerializer, SenderReceiverSerializer
+from school.serializers import StudentSerializer, SchoolYearSerializer
 
 from django.contrib.auth import get_user_model
-# from apps.accounts.models import User
+# from accounts.models import User
 User = get_user_model()
 
 class CategoryNotificationSerializer(serializers.ModelSerializer):

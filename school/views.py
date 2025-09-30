@@ -38,7 +38,7 @@ from django.shortcuts import get_object_or_404
 
 # from django.db import transaction
 # # from .models import PasswordResetAttempt, get_end_of_month, update_student_statistics
-from apps.accounts.permissions import IsParent, IsAgent
+from accounts.permissions import IsParent, IsAgent
 
 
 from .models import Classe, School, Student, Teacher, SchoolYear, StudentStatistics, update_student_statistics

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from .models import User, Profile, PasswordResetAttempt
-from apps.school.models import Student
+from school.models import Student
 
 class SignUpSerializer(serializers.ModelSerializer):
     class Meta:

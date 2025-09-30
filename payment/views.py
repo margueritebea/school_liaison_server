@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 
-from apps.accounts.permissions import IsParent
+from accounts.permissions import IsParent
 
 from .models import Subscription, Payment, PayPalPayment, AppVersion
 
