@@ -28,6 +28,9 @@ from rest_framework.generics import RetrieveAPIView
 from . permissions import IsParent, IsAgent
 from . models import PasswordResetAttempt, Profile, User
 from . serializers import UserSerializer, SignUpSerializer, ProfileSerializer, ProfilePhotoSerializer, ProfileWithStudentsSerializer
+from notification.models import Notification, UserNotification
+from payment.models import Payment, Subscription
+from school.models import Student
 
 
 
